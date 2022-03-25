@@ -32,7 +32,9 @@ exports.signup = (req, res) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        return res.status(400).json({ handle: `this handle is already taken` });
+        return res
+          .status(400)
+          .json({ handle: `This username is already taken` });
       } else {
         return firebase
           .auth()
@@ -160,7 +162,7 @@ exports.getAuthenticatedUser = (req, res) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        userData.credientials = doc.data();
+        userData.credentials = doc.data();
         return db
           .collection("likes")
           .where("userHandle", "==", req.user.handle)
