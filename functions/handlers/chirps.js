@@ -23,6 +23,10 @@ exports.getAllChirps = (req, res) => {
 };
 
 exports.postOneChirp = (req, res) => {
+  if (req.body.body.trim() === "") {
+    return res.status(400).json({ body: "Body must not be empty" });
+  }
+
   const newChirp = {
     body: req.body.body,
     userHandle: req.user.handle,
